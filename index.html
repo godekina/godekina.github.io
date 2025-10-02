@@ -1,12 +1,220 @@
+<!DOCTYPE html>
 <html lang="en">
- <head>
-  <link rel="stylesheets" src="index.css" type="text/css">
- </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Science Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #e0e0e0;
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+    body.light-mode {
+      background: #ffffff;
+      color: #222;
+    }
+    header {
+      text-align: center;
+      padding: 1rem;
+      position: relative;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    header p {
+      color: #bbb;
+      margin: 0.5rem 0 0;
+    }
+    body.light-mode header p {
+      color: #555;
+    }
+    header img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      border: 3px solid #0073e6;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 1rem 0;
+      flex-wrap: wrap;
+    }
+    nav a {
+      text-decoration: none;
+      color: inherit;
+      font-weight: bold;
+    }
+    section {
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.7rem 1.5rem;
+      background: #0073e6;
+      color: #fff;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    .project {
+      border: 1px solid #333;
+      padding: 1rem;
+      border-radius: 8px;
+      background: #1e1e1e;
+      text-align: center;
+      transition: background 0.3s, border 0.3s;
+    }
+    body.light-mode .project {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+    }
+    .project img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+    }
+    .project h3 {
+      margin-top: 0;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #999;
+    }
+    .toggle-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.5rem 1rem;
+      background: #0073e6;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    /* Responsive Navbar */
+    .menu-toggle {
+      display: none;
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      color: inherit;
+      cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        display: none;
+      }
+      nav.active {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+    }
+  </style>
+</head>
 <body>
-  <h1>GIDEON ODEKINA</h1>
-  <h3>Hi, Welcome to my website!</h3>
-  <img src="https://content.codecademy.com/articles/github-pages-via-web-app/happy-ice-cream.gif" class="center"/>
- <p>I am currently learning frontend development on codecademy</p>
+  <header>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <img src="your-photo.jpg" alt="Profile Picture">
+    <h1>Gideon Odekina</h1>
+    <p>Data Scientist | Machine Learning Enthusiast</p>
+    <button class="toggle-btn" onclick="toggleMode()">Toggle Dark/Light</button>
+  </header>
+
+  <nav id="navbar">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I am a passionate Data Scientist with experience in machine learning, data analysis, and building AI-driven solutions. I enjoy turning complex datasets into actionable insights and impactful projects.
+    </p>
+    <a href="cv.pdf" class="btn" download>Download CV</a>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects">
+      <div class="project">
+        <img src="project1-thumb.jpg" alt="Customer Churn Prediction Thumbnail">
+        <h3>Customer Churn Prediction</h3>
+        <p>Built a machine learning model to predict customer churn with 85% accuracy using Python and Scikit-learn.</p>
+        <a href="https://github.com/yourusername/project1" target="_blank">View on GitHub</a>
+      </div>
+      <div class="project">
+        <img src="project2-thumb.jpg" alt="COVID-19 Dashboard Thumbnail">
+        <h3>COVID-19 Data Dashboard</h3>
+        <p>Interactive dashboard visualizing COVID-19 trends using Plotly and Dash.</p>
+        <a href="https://github.com/yourusername/project2" target="_blank">View on GitHub</a>
+      </div>
+      <div class="project">
+        <img src="project3-thumb.jpg" alt="Image Classification Thumbnail">
+        <h3>Image Classification</h3>
+        <p>Deep learning model classifying images into categories using TensorFlow and Keras.</p>
+        <a href="https://github.com/yourusername/project3" target="_blank">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+    <p>LinkedIn: <a href="https://linkedin.com/in/yourusername" target="_blank">linkedin.com/in/yourusername</a></p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Gideon Odekina. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Apply saved theme on load
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedMode = localStorage.getItem('theme');
+      if (savedMode === 'light') {
+        document.body.classList.add('light-mode');
+      }
+    });
+
+    function toggleMode() {
+      document.body.classList.toggle('light-mode');
+      if (document.body.classList.contains('light-mode')) {
+        localStorage.setItem('theme', 'light');
+      } else {
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+
+    function toggleMenu() {
+      document.getElementById('navbar').classList.toggle('active');
+    }
+  </script>
 </body>
- 
 </html>
