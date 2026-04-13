@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NTS Computers — AI & Data Science Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #05080d;
+  --bg2: #090e16;
+  --bg3: #0e1520;
+  --accent: #38bdf8;
+  --accent2: #818cf8;
+  --accent3: #34d399;
+  --gold: #fbbf24;
+  --text: #e2e8f0;
+  --text-muted: #64748b;
+  --text-dim: #2d3f52;
+  --border: rgba(56,189,248,0.1);
+  --border2: rgba(56,189,248,0.22);
+  --mono: 'Space Mono', monospace;
+  --sans: 'Sora', sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.7;overflow-x:hidden;}
+::selection{background:rgba(56,189,248,0.18);color:var(--accent);}
+::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px;}
+body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear-gradient(rgba(56,189,248,0.018) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,0.018) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:.875rem 2rem;background:rgba(5,8,13,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.nav-brand{display:flex;align-items:center;gap:.875rem;}
+.nav-logo-box{background:linear-gradient(135deg,var(--accent),var(--accent2));padding:.38rem .7rem;font-family:var(--mono);font-size:.75rem;font-weight:700;color:#05080d;letter-spacing:.05em;}
+.nav-wordmark{display:flex;flex-direction:column;line-height:1.2;}
+.nav-name{font-family:var(--mono);font-size:.8rem;font-weight:700;color:var(--text);letter-spacing:.08em;text-transform:uppercase;}
+.nav-tagline-small{font-family:var(--mono);font-size:.6rem;color:var(--text-muted);letter-spacing:.1em;text-transform:uppercase;}
+nav ul{list-style:none;display:flex;gap:1.75rem;}
+nav a{font-family:var(--mono);font-size:.68rem;color:var(--text-muted);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;}
+nav a:hover{color:var(--accent);}
+
+/* ── LAYOUT ── */
+section{position:relative;z-index:1;}
+.container{max-width:1100px;margin:0 auto;padding:0 2rem;}
+
+/* ── HERO ── */
+#hero{min-height:100vh;display:flex;align-items:center;padding:8rem 2rem 4rem;overflow:hidden;}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;}
+.orb1{width:700px;height:700px;top:-250px;right:-200px;background:rgba(129,140,248,0.07);}
+.orb2{width:500px;height:500px;bottom:-150px;left:-150px;background:rgba(52,211,153,0.05);}
+.orb3{width:280px;height:280px;top:42%;left:36%;background:rgba(56,189,248,0.04);}
+.hero-inner{max-width:1100px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 400px;gap:4rem;align-items:center;}
+
+.status-pulse{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.68rem;color:var(--accent3);letter-spacing:.1em;margin-bottom:1.25rem;}
+.status-pulse::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent3);box-shadow:0 0 8px var(--accent3);animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 8px var(--accent3);}50%{box-shadow:0 0 20px var(--accent3);}}
+
+.hero-eyebrow{font-family:var(--mono);font-size:.7rem;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:.6rem;}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--accent);}
+
+h1{font-size:clamp(2.4rem,5.5vw,4.6rem);font-weight:700;line-height:1.06;letter-spacing:-.03em;margin-bottom:1.25rem;}
+h1 .line1{display:block;color:var(--text);}
+h1 .line2{display:block;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+.hero-sub{font-size:1.02rem;color:var(--text-muted);max-width:520px;margin-bottom:.75rem;font-weight:300;line-height:1.78;}
+.hero-sub strong{color:var(--text);font-weight:500;}
+.hero-tagline{font-family:var(--mono);font-size:.75rem;color:var(--accent);margin-bottom:2rem;letter-spacing:.04em;}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+
+.btn-primary{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;padding:.8rem 1.75rem;background:var(--accent);color:#05080d;border:none;cursor:pointer;text-decoration:none;display:inline-block;font-weight:700;transition:all .2s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));}
+.btn-primary:hover{background:#fff;box-shadow:0 0 40px rgba(56,189,248,.4);}
+.btn-secondary{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;padding:.8rem 1.75rem;background:transparent;color:var(--accent);border:1px solid var(--border2);cursor:pointer;text-decoration:none;display:inline-block;transition:all .2s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));}
+.btn-secondary:hover{background:rgba(56,189,248,.06);border-color:var(--accent);}
+
+.hero-stats{display:flex;gap:2.25rem;flex-wrap:wrap;border-top:1px solid var(--border);padding-top:1.5rem;}
+.stat-num{font-family:var(--mono);font-size:1.65rem;font-weight:700;color:var(--accent);display:block;line-height:1;}
+.stat-label{font-size:.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-top:.2rem;}
+
+/* Pipeline visual */
+.hero-visual{background:var(--bg2);border:1px solid var(--border);padding:1.5rem;font-family:var(--mono);font-size:.72rem;}
+.hv-title{color:var(--text-muted);margin-bottom:.75rem;letter-spacing:.08em;font-size:.62rem;text-transform:uppercase;}
+.hv-filename{color:var(--accent);margin-bottom:.4rem;font-size:.75rem;}
+.hv-badge{display:inline-block;background:rgba(52,211,153,.1);color:var(--accent3);border:1px solid rgba(52,211,153,.3);font-size:.6rem;padding:.15rem .5rem;letter-spacing:.08em;margin-bottom:1.1rem;}
+.pipeline-steps{display:flex;align-items:center;gap:.3rem;margin-bottom:1.1rem;flex-wrap:wrap;}
+.ps{padding:.28rem .55rem;font-size:.62rem;border:1px solid var(--border);color:var(--text-muted);}
+.ps.done{border-color:rgba(52,211,153,.4);color:var(--accent3);background:rgba(52,211,153,.05);}
+.ps.active{border-color:var(--accent);color:var(--accent);background:rgba(56,189,248,.06);}
+.ps-arr{color:var(--text-dim);font-size:.6rem;}
+.hv-log{border-top:1px solid var(--border);padding-top:.75rem;display:flex;flex-direction:column;gap:.3rem;}
+.log-line{font-size:.62rem;color:var(--text-muted);}
+.log-line .ok{color:var(--accent3);}
+.log-line .info{color:var(--accent);}
+.log-line .warn{color:var(--gold);}
+.log-line .ts{color:var(--text-dim);margin-right:.4rem;}
+.hv-metrics{margin-top:.875rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:.4rem;}
+.hv-metric{background:var(--bg3);border:1px solid var(--border);padding:.5rem;text-align:center;}
+.hv-metric-val{font-size:.88rem;font-weight:700;color:var(--accent);display:block;}
+.hv-metric-key{font-size:.55rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.05em;}
+
+/* ── ABOUT ── */
+#about{padding:5.5rem 0;background:var(--bg2);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.about-text p{color:var(--text-muted);margin-bottom:1.1rem;font-weight:300;font-size:1rem;}
+.about-text p strong{color:var(--text);font-weight:500;}
+.about-badges{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.25rem;}
+.about-badge{font-family:var(--mono);font-size:.67rem;padding:.25rem .6rem;border:1px solid var(--border2);color:var(--accent);background:rgba(56,189,248,.04);text-transform:uppercase;letter-spacing:.06em;}
+.about-badge.green{border-color:rgba(52,211,153,.3);color:var(--accent3);background:rgba(52,211,153,.04);}
+/* stat boxes */
+.about-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:.875rem;}
+.about-stat-box{background:var(--bg3);border:1px solid var(--border);padding:1.25rem;position:relative;overflow:hidden;}
+.about-stat-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent3),var(--accent));}
+.asb-val{font-family:var(--mono);font-size:1.8rem;font-weight:700;color:var(--accent3);display:block;line-height:1;margin-bottom:.3rem;}
+.asb-label{font-size:.72rem;color:var(--text-muted);line-height:1.4;font-weight:300;}
+
+/* ── AI IMPACT ── */
+#ai-banner{background:linear-gradient(135deg,rgba(56,189,248,.055) 0%,rgba(129,140,248,.055) 50%,rgba(52,211,153,.04) 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:4.5rem 0;}
+.ai-banner-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+.ai-banner-tag{font-family:var(--mono);font-size:.68rem;color:var(--accent3);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:.6rem;}
+.ai-banner-tag::before{content:'';width:28px;height:1px;background:var(--accent3);}
+.ai-banner-headline{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:700;letter-spacing:-.02em;line-height:1.2;margin-bottom:1rem;}
+.ai-banner-headline em{font-style:normal;background:linear-gradient(135deg,var(--accent3),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.ai-banner-text{color:var(--text-muted);font-weight:300;font-size:.95rem;margin-bottom:1.5rem;}
+.ai-impacts{display:flex;flex-direction:column;gap:.875rem;}
+.ai-impact{display:flex;align-items:flex-start;gap:.875rem;padding:.875rem 1rem;background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--accent3);}
+.ai-impact-num{font-family:var(--mono);font-size:1.3rem;font-weight:700;color:var(--accent3);min-width:58px;line-height:1.1;flex-shrink:0;}
+.ai-impact-num span{font-size:.56rem;color:var(--text-muted);display:block;font-weight:400;letter-spacing:.06em;text-transform:uppercase;}
+.ai-impact-text{font-size:.83rem;color:var(--text-muted);font-weight:300;line-height:1.55;}
+.ai-impact-text strong{color:var(--text);font-weight:500;}
+
+/* ── SECTION HEADERS ── */
+.section-header{margin-bottom:3rem;}
+.section-tag{font-family:var(--mono);font-size:.67rem;color:var(--accent);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.5rem;}
+h2{font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:700;letter-spacing:-.02em;color:var(--text);}
+h2 em{font-style:normal;color:var(--accent);}
+
+/* ── SKILLS ── */
+#skills{padding:5.5rem 0;}
+.skills-categories{display:grid;grid-template-columns:repeat(auto-fit,minmax(295px,1fr));gap:1.25rem;}
+.skill-card{background:var(--bg2);border:1px solid var(--border);padding:1.5rem;transition:all .3s;position:relative;overflow:hidden;}
+.skill-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;transition:opacity .3s;}
+.skill-card.ai-card{border-color:rgba(52,211,153,.2);background:linear-gradient(135deg,rgba(52,211,153,.03),var(--bg2));}
+.skill-card.ai-card::after{background:linear-gradient(90deg,var(--accent3),var(--accent));opacity:1;}
+.skill-card:not(.ai-card)::after{background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:0;}
+.skill-card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 8px 40px rgba(56,189,248,.1);}
+.skill-card:not(.ai-card):hover::after{opacity:1;}
+.skill-card-header{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;}
+.skill-icon{font-size:1.35rem;flex-shrink:0;}
+.skill-card h3{font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text);font-family:var(--mono);}
+.ai-badge-sm{font-size:.55rem;font-family:var(--mono);padding:.12rem .4rem;background:rgba(52,211,153,.1);color:var(--accent3);border:1px solid rgba(52,211,153,.3);letter-spacing:.06em;text-transform:uppercase;margin-left:.5rem;vertical-align:middle;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.3rem;}
+.skill-tag{font-size:.67rem;font-family:var(--mono);padding:.2rem .5rem;background:rgba(56,189,248,.03);border:1px solid var(--border);color:var(--text-muted);}
+.skill-tag.hl{background:rgba(52,211,153,.06);border-color:rgba(52,211,153,.22);color:var(--accent3);}
+
+/* ── PROJECTS ── */
+#projects{padding:5.5rem 0;background:var(--bg2);}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem;}
+.project-card{background:var(--bg3);border:1px solid var(--border);padding:1.5rem;transition:all .3s;display:flex;flex-direction:column;}
+.project-card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 8px 40px rgba(56,189,248,.1);}
+.project-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.6rem;gap:.5rem;}
+.project-name{font-family:var(--mono);font-size:.88rem;font-weight:700;color:var(--accent);text-decoration:none;flex:1;}
+.project-name:hover{text-decoration:underline;}
+.project-meta{font-family:var(--mono);font-size:.67rem;color:var(--text-muted);white-space:nowrap;}
+.project-desc{font-size:.83rem;color:var(--text-muted);line-height:1.6;flex:1;margin-bottom:1rem;font-weight:300;}
+.project-footer{display:flex;align-items:center;justify-content:space-between;}
+.project-lang{font-family:var(--mono);font-size:.63rem;padding:.18rem .45rem;border:1px solid var(--border);color:var(--text-dim);text-transform:uppercase;}
+.project-link{font-family:var(--mono);font-size:.63rem;color:var(--accent);text-decoration:none;text-transform:uppercase;letter-spacing:.06em;}
+.project-link:hover{text-decoration:underline;}
+.projects-loading,.error-card{text-align:center;padding:2.5rem;color:var(--text-muted);font-family:var(--mono);font-size:.82rem;border:1px solid var(--border);}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+
+/* ── EXPERIENCE ── */
+#experience{padding:5.5rem 0;}
+.timeline{position:relative;padding-left:1.75rem;}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(180deg,var(--accent),rgba(56,189,248,.1),transparent);}
+.timeline-item{position:relative;padding-bottom:2.75rem;padding-left:2rem;}
+.timeline-item::before{content:'';position:absolute;left:-1.75rem;top:7px;width:8px;height:8px;background:var(--accent);border:2px solid var(--bg);border-radius:50%;box-shadow:0 0 10px rgba(56,189,248,.5);}
+.timeline-item.featured::before{background:var(--accent3);box-shadow:0 0 14px rgba(52,211,153,.6);width:10px;height:10px;left:calc(-1.75rem - 1px);}
+.tl-date{font-family:var(--mono);font-size:.67rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.35rem;}
+.tl-title{font-size:1.05rem;font-weight:600;color:var(--text);margin-bottom:.2rem;}
+.tl-client{font-size:.875rem;color:var(--text-muted);margin-bottom:.875rem;font-weight:300;}
+.tl-bullets{margin-top:.5rem;list-style:none;display:flex;flex-direction:column;gap:.3rem;}
+.tl-bullets li{font-size:.855rem;color:var(--text-muted);font-weight:300;padding-left:1rem;position:relative;line-height:1.65;}
+.tl-bullets li::before{content:'▸';position:absolute;left:0;color:var(--accent);font-size:.6rem;top:.3rem;}
+.tl-bullets li strong{color:var(--text);font-weight:500;}
+.tl-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.75rem;}
+.tl-tag{font-family:var(--mono);font-size:.63rem;padding:.18rem .45rem;background:rgba(56,189,248,.03);border:1px solid var(--border);color:var(--text-muted);}
+.tl-tag.ai{background:rgba(52,211,153,.05);border-color:rgba(52,211,153,.22);color:var(--accent3);}
+.featured-label{font-family:var(--mono);font-size:.58rem;color:var(--accent3);border:1px solid rgba(52,211,153,.3);padding:.12rem .45rem;letter-spacing:.08em;text-transform:uppercase;margin-left:.75rem;vertical-align:middle;}
+
+/* ── CERTIFICATIONS ── */
+#certifications{padding:5.5rem 0;background:var(--bg2);}
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:1rem;}
+.cert-card{background:var(--bg3);border:1px solid var(--border);padding:1.25rem 1.5rem;display:flex;gap:1rem;align-items:flex-start;transition:all .3s;}
+.cert-card:hover{border-color:var(--border2);box-shadow:0 4px 24px rgba(56,189,248,.08);}
+.cert-icon{font-size:1.4rem;flex-shrink:0;margin-top:.1rem;}
+.cert-name{font-size:.875rem;font-weight:500;color:var(--text);margin-bottom:.2rem;line-height:1.35;}
+.cert-issuer{font-size:.73rem;color:var(--text-muted);font-family:var(--mono);}
+.cert-status{display:inline-block;margin-top:.4rem;font-size:.58rem;font-family:var(--mono);padding:.13rem .42rem;letter-spacing:.06em;text-transform:uppercase;}
+.cert-status.active{background:rgba(52,211,153,.1);color:var(--accent3);border:1px solid rgba(52,211,153,.3);}
+.cert-status.done{background:rgba(56,189,248,.05);color:var(--accent);border:1px solid var(--border);}
+
+/* ── CONTACT ── */
+#contact{padding:5.5rem 0;text-align:center;}
+.contact-tagline{font-size:.95rem;color:var(--text-muted);font-weight:300;max-width:520px;margin:.75rem auto 0;}
+.contact-grid{display:flex;justify-content:center;gap:1.25rem;flex-wrap:wrap;margin-top:2rem;}
+.contact-card{background:var(--bg2);border:1px solid var(--border);padding:1.1rem 1.6rem;text-align:left;min-width:190px;transition:all .2s;}
+.contact-card:hover{border-color:var(--border2);background:var(--bg3);}
+.contact-label{font-family:var(--mono);font-size:.62rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.35rem;}
+.contact-value{font-family:var(--mono);font-size:.8rem;color:var(--accent);text-decoration:none;display:block;}
+.contact-value:hover{text-decoration:underline;}
+
+/* ── FOOTER ── */
+footer{padding:1.75rem 2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;position:relative;z-index:1;}
+footer p{font-family:var(--mono);font-size:.63rem;color:var(--text-dim);letter-spacing:.04em;}
+footer a{color:var(--accent);text-decoration:none;}
+.footer-brand{display:flex;align-items:center;gap:.65rem;}
+.footer-logo{background:linear-gradient(135deg,var(--accent),var(--accent2));padding:.25rem .48rem;font-family:var(--mono);font-size:.6rem;font-weight:700;color:#05080d;}
+.footer-info{display:flex;flex-direction:column;line-height:1.3;}
+.footer-info span{font-family:var(--mono);font-size:.65rem;color:var(--text-muted);}
+.footer-info small{font-family:var(--mono);font-size:.58rem;color:var(--text-dim);}
+
+/* ── DIVIDER ── */
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);margin:0;}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+.fade-up{animation:fadeUp .65s ease forwards;opacity:0;}
+.d1{animation-delay:.08s;}.d2{animation-delay:.18s;}.d3{animation-delay:.28s;}.d4{animation-delay:.42s;}.d5{animation-delay:.58s;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;}
+  .hero-visual{display:none;}
+  .ai-banner-inner{grid-template-columns:1fr;}
+  .about-grid{grid-template-columns:1fr;}
+  nav ul{display:none;}
+  footer{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-box">NTS</div>
+    <div class="nav-wordmark">
+      <span class="nav-name">NTS Computers</span>
+      <span class="nav-tagline-small">AI &amp; Technology Solutions</span>
+    </div>
+  </div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Capabilities</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#experience">Track Record</a></li>
+    <li><a href="#certifications">Credentials</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+  <div class="hero-inner container">
+    <div>
+      <div class="status-pulse fade-up d1">Available for engagement</div>
+      <div class="hero-eyebrow fade-up d1">NTS Computers &nbsp;·&nbsp; Lagos, Nigeria</div>
+      <h1 class="fade-up d2">
+        <span class="line1">Intelligent Systems.</span>
+        <span class="line2">Data-Driven Results.</span>
+      </h1>
+      <p class="hero-sub fade-up d3">
+        We are an <strong>AI and technology solutions company</strong> specialising in machine learning, predictive analytics, cloud infrastructure, and intelligent automation. We build systems that cut costs, surface insights, and scale.
+      </p>
+      <p class="hero-tagline fade-up d3">// Data Science &nbsp;·&nbsp; Machine Learning &nbsp;·&nbsp; Cloud &nbsp;·&nbsp; Automation &nbsp;·&nbsp; DevOps</p>
+      <div class="hero-ctas fade-up d4">
+        <a href="#ai-banner" class="btn-primary">Our AI Impact ↓</a>
+        <a href="#contact" class="btn-secondary">Engage Us</a>
+      </div>
+      <div class="hero-stats fade-up d5">
+        <div>
+          <span class="stat-num">9+</span>
+          <span class="stat-label">Years in IT</span>
+        </div>
+        <div>
+          <span class="stat-num">₦80M</span>
+          <span class="stat-label">Annual AI Savings Delivered</span>
+        </div>
+        <div>
+          <span class="stat-num">20%</span>
+          <span class="stat-label">ML Forecast Accuracy Gain</span>
+        </div>
+        <div>
+          <span class="stat-num">83%</span>
+          <span class="stat-label">Automation Time Reduction</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pipeline visual -->
+    <div class="hero-visual fade-up d4">
+      <div class="hv-title">ntscomputers / ai-pipeline</div>
+      <div class="hv-filename">ml-forecasting-pipeline.py</div>
+      <div class="hv-badge">● RUNNING</div>
+      <div class="pipeline-steps">
+        <span class="ps done">✓ Ingest</span><span class="ps-arr">›</span>
+        <span class="ps done">✓ Clean</span><span class="ps-arr">›</span>
+        <span class="ps done">✓ Train</span><span class="ps-arr">›</span>
+        <span class="ps active">▶ Deploy</span><span class="ps-arr">›</span>
+        <span class="ps">○ Monitor</span>
+      </div>
+      <div class="hv-log">
+        <div class="log-line"><span class="ts">[09:12:04]</span><span class="ok">✓</span> Data pipeline — 50K rows validated</div>
+        <div class="log-line"><span class="ts">[09:12:19]</span><span class="ok">✓</span> ML model trained — accuracy 94.2%</div>
+        <div class="log-line"><span class="ts">[09:12:33]</span><span class="info">↳</span> Pushing to Azure ML endpoint...</div>
+        <div class="log-line"><span class="ts">[09:12:47]</span><span class="warn">⧗</span> Awaiting prediction health check...</div>
+      </div>
+      <div class="hv-metrics">
+        <div class="hv-metric"><span class="hv-metric-val">94.2%</span><span class="hv-metric-key">Accuracy</span></div>
+        <div class="hv-metric"><span class="hv-metric-val">−40%</span><span class="hv-metric-key">Process Time</span></div>
+        <div class="hv-metric"><span class="hv-metric-val">₦80M</span><span class="hv-metric-key">Saved / yr</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-header">
+          <p class="section-tag">// 01 — who we are</p>
+          <h2>About <em>NTS Computers</em></h2>
+        </div>
+        <p>
+          NTS Computers is a Nigerian technology company with <strong>over 9 years of combined IT expertise</strong> — spanning artificial intelligence, data science, cloud engineering, and infrastructure. We bring together deep technical skills to solve real business problems at scale.
+        </p>
+        <p>
+          Our core strength is <strong>applied AI and data science</strong>: building production-grade machine learning systems, automating data pipelines, and deploying cloud infrastructure that organisations depend on. We do not build prototypes — we ship solutions that run in production and deliver measurable value.
+        </p>
+        <p>
+          We have delivered outcomes across industries including <strong>telecommunications, logistics, autonomous systems, and enterprise IT</strong> — working with clients in Nigeria, the US, and remotely across Africa.
+        </p>
+        <div class="about-badges">
+          <span class="about-badge green">AI / ML</span>
+          <span class="about-badge green">Data Science</span>
+          <span class="about-badge green">Predictive Analytics</span>
+          <span class="about-badge">Cloud (Azure / AWS)</span>
+          <span class="about-badge">Python</span>
+          <span class="about-badge">DevOps</span>
+          <span class="about-badge">Automation</span>
+          <span class="about-badge">Nigeria-based</span>
+        </div>
+      </div>
+      <div class="about-stat-grid">
+        <div class="about-stat-box">
+          <span class="asb-val">₦80M</span>
+          <span class="asb-label">Annual savings delivered via AI anomaly detection</span>
+        </div>
+        <div class="about-stat-box">
+          <span class="asb-val">20%</span>
+          <span class="asb-label">Demand forecast improvement through ML modelling</span>
+        </div>
+        <div class="about-stat-box">
+          <span class="asb-val">50K+</span>
+          <span class="asb-label">AI training images annotated for computer vision</span>
+        </div>
+        <div class="about-stat-box">
+          <span class="asb-val">83%</span>
+          <span class="asb-label">Process time cut via Python/SQL automation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── AI IMPACT ── -->
+<section id="ai-banner">
+  <div class="container">
+    <div class="ai-banner-inner">
+      <div>
+        <div class="ai-banner-tag">Why NTS Computers for AI</div>
+        <h2 class="ai-banner-headline">Data science &amp; AI that delivers <em>measurable outcomes</em></h2>
+        <p class="ai-banner-text">
+          Our AI and data science work is not experimental. It is production-deployed engineering that has directly reduced operational costs, improved forecast precision, and automated critical business workflows at scale — with results we can demonstrate.
+        </p>
+        <a href="#experience" class="btn-secondary">Full Project Track Record →</a>
+      </div>
+      <div class="ai-impacts">
+        <div class="ai-impact">
+          <div class="ai-impact-num">₦80M<span>/ year</span></div>
+          <div class="ai-impact-text"><strong>Anomaly detection system</strong> integrated into cloud data pipelines — cutting unplanned downtime and delivering direct annual cost savings.</div>
+        </div>
+        <div class="ai-impact">
+          <div class="ai-impact-num">20%<span>improvement</span></div>
+          <div class="ai-impact-text"><strong>Predictive ML model</strong> for demand forecasting — 20% accuracy gain over baseline, enabling smarter supply chain and inventory decisions.</div>
+        </div>
+        <div class="ai-impact">
+          <div class="ai-impact-num">50K+<span>images</span></div>
+          <div class="ai-impact-text"><strong>Computer vision data pipeline</strong> — led production-scale annotation of 50,000+ images for autonomous vehicle AI training.</div>
+        </div>
+        <div class="ai-impact">
+          <div class="ai-impact-num">83%<span>time saved</span></div>
+          <div class="ai-impact-text"><strong>Python &amp; SQL automation</strong> cut enterprise customer onboarding time by 83% — processing thousands of records without manual intervention.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CAPABILITIES ── -->
+<section id="skills">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-tag">// 02 — what we do</p>
+      <h2>Our <em>Capabilities</em></h2>
+    </div>
+    <div class="skills-categories">
+
+      <div class="skill-card ai-card">
+        <div class="skill-card-header">
+          <span class="skill-icon">🤖</span>
+          <h3>AI &amp; Machine Learning <span class="ai-badge-sm">Core Service</span></h3>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag hl">Predictive Modelling</span>
+          <span class="skill-tag hl">Anomaly Detection</span>
+          <span class="skill-tag hl">Demand Forecasting</span>
+          <span class="skill-tag hl">Computer Vision</span>
+          <span class="skill-tag hl">ML Pipelines</span>
+          <span class="skill-tag hl">Model Deployment</span>
+          <span class="skill-tag">TensorFlow</span>
+          <span class="skill-tag">Scikit-learn</span>
+          <span class="skill-tag">Azure ML</span>
+          <span class="skill-tag">LLM Integration</span>
+        </div>
+      </div>
+
+      <div class="skill-card ai-card">
+        <div class="skill-card-header">
+          <span class="skill-icon">📊</span>
+          <h3>Data Science &amp; Analytics <span class="ai-badge-sm">Core Service</span></h3>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag hl">Data Pipelines</span>
+          <span class="skill-tag hl">Statistical Analysis</span>
+          <span class="skill-tag hl">KPI Dashboards</span>
+          <span class="skill-tag hl">Real-time Analytics</span>
+          <span class="skill-tag hl">Cloud Data Migration</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Pandas / NumPy</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Tableau</span>
+          <span class="skill-tag">Power BI</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <span class="skill-icon">☁</span>
+          <h3>Cloud &amp; DevOps</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">Microsoft Azure</span>
+          <span class="skill-tag">AWS</span>
+          <span class="skill-tag">Azure DevOps</span>
+          <span class="skill-tag">CI/CD Pipelines</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Azure Container Registry</span>
+          <span class="skill-tag">Bicep / ARM</span>
+          <span class="skill-tag">GitHub Actions</span>
+          <span class="skill-tag">Azure Monitor</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <span class="skill-icon">⚡</span>
+          <h3>Automation &amp; Scripting</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python 3.x</span>
+          <span class="skill-tag">FastAPI</span>
+          <span class="skill-tag">REST APIs</span>
+          <span class="skill-tag">PowerShell</span>
+          <span class="skill-tag">Bash / Shell</span>
+          <span class="skill-tag">ETL Workflows</span>
+          <span class="skill-tag">Task Automation</span>
+          <span class="skill-tag">Web Scraping</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <span class="skill-icon">🗄️</span>
+          <h3>Data Infrastructure</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">Azure SQL</span>
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">MongoDB</span>
+          <span class="skill-tag">Redis</span>
+          <span class="skill-tag">SQL Automation</span>
+          <span class="skill-tag">Data Warehousing</span>
+          <span class="skill-tag">Vector Databases</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <span class="skill-icon">🌐</span>
+          <h3>Systems &amp; Networks</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">Linux (Ubuntu)</span>
+          <span class="skill-tag">Windows Server</span>
+          <span class="skill-tag">Cisco Networking</span>
+          <span class="skill-tag">VNets &amp; NSGs</span>
+          <span class="skill-tag">System Administration</span>
+          <span class="skill-tag">ITIL 4</span>
+          <span class="skill-tag">Security</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECTS ── -->
+<section id="projects">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-tag">// 03 — open source &amp; tooling</p>
+      <h2>Our <em>Work</em></h2>
+    </div>
+    <div id="projects-container">
+      <div class="projects-loading">
+        <span>Loading repositories</span><span style="animation:blink 1s step-end infinite;color:var(--accent)">_</span>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2rem;">
+      <a href="https://github.com/godekina?tab=repositories" target="_blank" class="btn-secondary">View All on GitHub →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── TRACK RECORD ── -->
+<section id="experience">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-tag">// 04 — project &amp; engagement history</p>
+      <h2>Our <em>Track Record</em></h2>
+    </div>
+    <div class="timeline">
+
+      <div class="timeline-item featured">
+        <div class="tl-date">2022 — 2024</div>
+        <div class="tl-title">AI &amp; Data Science Consultancy <span class="featured-label">AI / ML</span></div>
+        <div class="tl-client">Prognozai &nbsp;·&nbsp; Remote, Ohio USA</div>
+        <ul class="tl-bullets">
+          <li>Spearheaded <strong>cloud data pipeline migration</strong> to AWS &amp; Azure — cut processing time 40% and enabled real-time analytics</li>
+          <li>Built and deployed a <strong>predictive ML model</strong> for demand forecasting achieving 20% accuracy improvement over the existing baseline</li>
+          <li>Managed a team delivering production-scale <strong>computer vision annotation</strong> of 50,000+ images for autonomous vehicle AI</li>
+          <li><strong>Anomaly detection integration</strong> reduced machinery downtime 15%, generating ₦80M/year in operational savings</li>
+        </ul>
+        <div class="tl-tags">
+          <span class="tl-tag ai">Machine Learning</span>
+          <span class="tl-tag ai">Anomaly Detection</span>
+          <span class="tl-tag ai">Data Pipelines</span>
+          <span class="tl-tag ai">Computer Vision</span>
+          <span class="tl-tag">AWS</span><span class="tl-tag">Azure</span>
+          <span class="tl-tag">Python</span><span class="tl-tag">SQL</span>
+        </div>
+      </div>
+
+      <div class="timeline-item featured">
+        <div class="tl-date">2019 — 2021</div>
+        <div class="tl-title">Data Analytics &amp; Automation Engagement <span class="featured-label">Analytics</span></div>
+        <div class="tl-client">MTN Nigeria &nbsp;via&nbsp; Tech Mahindra (Bluechip Technology)</div>
+        <ul class="tl-bullets">
+          <li><strong>Python/SQL automation pipeline</strong> reduced enterprise customer onboarding time by 83%</li>
+          <li>Delivered <strong>Tableau KPI dashboards</strong> for cross-functional performance tracking at scale</li>
+          <li>JIRA-integrated support workflow reduced average resolution time by 40%</li>
+        </ul>
+        <div class="tl-tags">
+          <span class="tl-tag ai">Data Analytics</span>
+          <span class="tl-tag ai">Tableau</span>
+          <span class="tl-tag">Python</span>
+          <span class="tl-tag">SQL Automation</span>
+          <span class="tl-tag">Telecoms</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-date">2025 — Present</div>
+        <div class="tl-title">Cloud &amp; DevOps Engineering</div>
+        <div class="tl-client">Internal Practice &amp; Client Projects</div>
+        <ul class="tl-bullets">
+          <li>End-to-end <strong>CI/CD pipeline management</strong> in Azure DevOps with YAML multi-stage configurations</li>
+          <li>Building and deploying <strong>containerised applications</strong> via Docker and Azure Container Registry</li>
+          <li>Infrastructure-as-code automation using Bicep, PowerShell, and Bash</li>
+        </ul>
+        <div class="tl-tags">
+          <span class="tl-tag">Azure DevOps</span>
+          <span class="tl-tag">Docker</span>
+          <span class="tl-tag">CI/CD</span>
+          <span class="tl-tag">Bicep</span>
+          <span class="tl-tag">PowerShell</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-date">2018 — 2019</div>
+        <div class="tl-title">Network Infrastructure Engagement</div>
+        <div class="tl-client">Cimnet Infrastructure Limited</div>
+        <ul class="tl-bullets">
+          <li>Cisco-based network redesign achieving 30% uptime improvement</li>
+          <li>Security posture overhaul reduced incidents by 50% within one year</li>
+        </ul>
+        <div class="tl-tags">
+          <span class="tl-tag">Cisco</span>
+          <span class="tl-tag">Network Engineering</span>
+          <span class="tl-tag">Security</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-date">2016 — 2018</div>
+        <div class="tl-title">Systems &amp; IT Support</div>
+        <div class="tl-client">PCB Computers Limited</div>
+        <ul class="tl-bullets">
+          <li>Resolved 300+ hardware and software issues maintaining 97% client satisfaction</li>
+          <li>Led a 5-engineer technical support team</li>
+        </ul>
+        <div class="tl-tags">
+          <span class="tl-tag">Systems</span>
+          <span class="tl-tag">Hardware</span>
+          <span class="tl-tag">Team Management</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CREDENTIALS ── -->
+<section id="certifications">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-tag">// 05 — credentials &amp; qualifications</p>
+      <h2>Team <em>Credentials</em></h2>
+    </div>
+    <div class="certs-grid">
+      <div class="cert-card">
+        <div class="cert-icon">🏅</div>
+        <div><div class="cert-name">Microsoft Certified: Azure Developer Associate</div><div class="cert-issuer">Microsoft</div><span class="cert-status active">Active</span></div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">☁</div>
+        <div><div class="cert-name">Azure Fundamentals (AZ-900)</div><div class="cert-issuer">Microsoft · 2023</div><span class="cert-status done">Certified</span></div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">📊</div>
+        <div><div class="cert-name">Data Analytics Professional Program</div><div class="cert-issuer">OneCampus Academy · 2023</div><span class="cert-status done">Certified</span></div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🌐</div>
+        <div><div class="cert-name">CCNA Routing &amp; Switching</div><div class="cert-issuer">New Horizons · 2019</div><span class="cert-status done">Certified</span></div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🔧</div>
+        <div><div class="cert-name">ITIL 4 Foundation</div><div class="cert-issuer">Tech Mahindra · 2019</div><span class="cert-status done">Certified</span></div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🎓</div>
+        <div><div class="cert-name">B.Sc. Computer Science</div><div class="cert-issuer">ISSPT, Benin Republic · 2023</div><span class="cert-status done">Graduated</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header" style="text-align:center">
+      <p class="section-tag" style="text-align:center">// 06 — get in touch</p>
+      <h2>Let's build something <em>together</em></h2>
+    </div>
+    <p class="contact-tagline">We are open to AI and data science contracts, cloud engineering projects, and technology partnerships. Reach out to start a conversation.</p>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-label">Email</div>
+        <a class="contact-value" href="mailto:nttonous@gmail.com">nttonous@gmail.com</a>
+      </div>
+      <div class="contact-card">
+        <div class="contact-label">Phone</div>
+        <a class="contact-value" href="tel:+2349091202365">+234 909 120 2365</a>
+      </div>
+      <div class="contact-card">
+        <div class="contact-label">GitHub</div>
+        <a class="contact-value" href="https://github.com/godekina" target="_blank">github.com/godekina</a>
+      </div>
+      <div class="contact-card">
+        <div class="contact-label">LinkedIn</div>
+        <a class="contact-value" href="https://linkedin.com/in/hezekiah-umoh-799811188" target="_blank">linkedin.com/in/hezekiah-umoh</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-brand">
+    <div class="footer-logo">NTS</div>
+    <div class="footer-info">
+      <span>NTS Computers</span>
+      <small>AI &amp; Technology Solutions · Lagos, Nigeria</small>
+    </div>
+  </div>
+  <p>© 2025 NTS Computers &nbsp;·&nbsp; All rights reserved</p>
+</footer>
+
+<script>
+const GH_USER = 'godekina';
+const LANG_COLORS = {
+  Python:'#3776ab',JavaScript:'#f7df1e',TypeScript:'#3178c6',
+  HTML:'#e34c26',CSS:'#563d7c',Shell:'#89e051',
+  'Jupyter Notebook':'#da5b0b',Go:'#00add8',Rust:'#dea584',
+};
+
+async function loadGitHub() {
+  try {
+    const res = await fetch(`https://api.github.com/users/${GH_USER}/repos?sort=updated&per_page=30`);
+    if (res.ok) { renderProjects(await res.json()); }
+    else { showErr(); }
+  } catch(e) { showErr(); }
+}
+
+function renderProjects(repos) {
+  const c = document.getElementById('projects-container');
+  const items = repos
+    .filter(r => !r.fork || r.stargazers_count > 0)
+    .sort((a,b) => b.stargazers_count - a.stargazers_count || new Date(b.updated_at) - new Date(a.updated_at))
+    .slice(0, 9);
+  if (!items.length) { showErr(); return; }
+  const grid = document.createElement('div');
+  grid.className = 'projects-grid';
+  items.forEach(r => {
+    const lang = r.language || 'Code';
+    const lc = LANG_COLORS[lang] || 'var(--border)';
+    const card = document.createElement('div');
+    card.className = 'project-card';
+    card.innerHTML = `
+      <div class="project-card-top">
+        <a class="project-name" href="${r.html_url}" target="_blank">${r.name}</a>
+        <span class="project-meta">${r.stargazers_count > 0 ? '★ ' + r.stargazers_count : ''}${r.forks_count > 0 ? ' ⑂ ' + r.forks_count : ''}</span>
+      </div>
+      <p class="project-desc">${r.description || 'No description provided.'}</p>
+      <div class="project-footer">
+        <span class="project-lang" style="border-color:${lc};color:${lc};">${lang}</span>
+        <a class="project-link" href="${r.html_url}" target="_blank">View →</a>
+      </div>`;
+    grid.appendChild(card);
+  });
+  c.innerHTML = '';
+  c.appendChild(grid);
+}
+
+function showErr() {
+  document.getElementById('projects-container').innerHTML =
+    `<div class="error-card">Could not load repositories. <a href="https://github.com/godekina?tab=repositories" target="_blank" style="color:var(--accent)">View on GitHub →</a></div>`;
+}
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.skill-card,.timeline-item,.cert-card,.ai-impact,.about-stat-box').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(18px)';
+  el.style.transition = 'opacity .5s ease, transform .5s ease';
+  obs.observe(el);
+});
+
+loadGitHub();
+</script>
+</body>
+</html>
